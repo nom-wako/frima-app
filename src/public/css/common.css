@@ -1,0 +1,9 @@
+a {
+  color: #000;
+  text-decoration: none;
+  transition: opacity .3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
