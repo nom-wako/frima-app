@@ -233,6 +233,21 @@ textarea {
   height: 100%;
 }
 
+.product-list__img {
+  position: relative;
+}
+
+.product-list__sold {
+  background-color: rgba(0,0,0,0.75);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  font-weight: 700;
+  position: absolute;
+  inset: 0;
+}
+
 .product-list__name {
   font-size: 25px;
   margin-top: 1px;

@@ -73,6 +73,9 @@
   width: 100%;
   height: 56px;
 }
+.show-purchase.is-sold {
+  background-color: #5F5F5F;
+}
 
 .show-section {
   margin-top: 40px;

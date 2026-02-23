@@ -6,7 +6,9 @@
 
 @section('content')
 <section class="show-detail">
-  <div class="show-detail__img"><img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"></div>
+  <div class="show-detail__img">
+    <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
+  </div>
   <div class="show-detail__content">
     <div class="show-header">
       <h2 class="show-name">{{ $product->name }}</h2>
@@ -27,7 +29,11 @@
         <p class="show-icons__num">{{ $product->comments_count }}</p>
       </li>
     </ul>
+    @if($product->is_sold)
+    <p class="show-purchase is-sold">Sold</p>
+    @else
     <a href="/purchase/{{ $product->id }}" class="show-purchase">購入手続きへ</a>
+    @endif
     <section class="show-section">
       <h3 class="show-section__heading">商品説明</h3>
       <div class="show-description">{{ $product->description }}</div>
@@ -65,6 +71,7 @@
       </div>
       @endforeach
       @auth
+      @if(!$product->is_sold)
       <form action="{{ route('comments.store', $product->id) }}" method="post" class="form">
         @csrf
         <div class="form__group">
@@ -75,6 +82,7 @@
           <button type="submit" class="form__button-submit form__button-submit--comment">コメントを送信する</button>
         </div>
       </form>
+      @endif
       @endauth
     </section>
   </div>
