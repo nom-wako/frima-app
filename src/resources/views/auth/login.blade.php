@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 @endsection
 
 @section('content')
-<section class="section">
+<section class="section section--narrow">
   <div class="section__inner">
     <h2 class="heading heading--primary">ログイン</h2>
     <form action="/login" method="post" class="auth-form">

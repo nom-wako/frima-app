@@ -25,7 +25,7 @@
           <li class="header-nav__item">
             <form action="/logout" method="post">
               @csrf
-              <button class="header-nav__button">ログアウト</button>
+              <button class="header-nav__logout">ログアウト</button>
             </form>
           </li>
           @else

@@ -30,4 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'mail_dashboard' => [
+        'url' => env('MAIL_DASHBOARD_URL', 'http://localhost:8025'),
+    ],
+
 ];
