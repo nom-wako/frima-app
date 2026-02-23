@@ -14,7 +14,7 @@ class ProductController extends Controller
 
         if ($tab === 'mylist') {
             $user = Auth::user();
-            $products = ($user && method_exists($user, 'facoriteProducts')) ? $user->favoriteProducts : collect();
+            $products = ($user && method_exists($user, 'favoriteProducts')) ? $user->favoriteProducts : collect();
         } else {
             $products = Product::all();
         }
@@ -24,6 +24,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        $product->load(['condition', 'categories']);
         return view('products.show', compact('product'));
     }
 }

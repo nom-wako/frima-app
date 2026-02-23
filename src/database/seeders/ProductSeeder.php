@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,7 @@ class ProductSeeder extends Seeder
     public function run()
     {
         $users = User::pluck('id')->toArray();
+        $categories = Category::all();
 
         $products = [
             [
@@ -111,9 +113,11 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create(array_merge($product, [
+            $product = Product::create(array_merge($product, [
                 'user_id' => $users[array_rand($users)],
             ]));
+            $randomCategories = $categories->random(rand(1, 2))->pluck('id');
+            $product->categories()->attach($randomCategories);
         }
     }
 }
