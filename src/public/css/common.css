@@ -35,9 +35,15 @@ textarea {
 .header__inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
   padding-inline: 40px;
   height: 100%;
+}
+
+.header-logo,
+.header-nav {
+  flex: 1;
 }
 
 .header-logo__link {
@@ -45,13 +51,14 @@ textarea {
 }
 
 .header-search {
+  justify-self: center;
   margin-inline: auto;
 }
 .header-search input {
   width: 500px;
 }
 
-.header-nav {
+.header-nav__list {
   display: flex;
   align-items: center;
   justify-content: end;
@@ -215,6 +222,7 @@ textarea {
   gap: 72px;
   list-style: none;
   margin-inline: auto;
+  margin-bottom: 60px;
   width: calc(100% - 140px);
   max-width: 1380px;
 }

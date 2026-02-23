@@ -19,8 +19,8 @@
       <div class="header-search">
         <input type="text" name="search">
       </div>
-      <nav>
-        <ul class="header-nav">
+      <nav class="header-nav">
+        <ul class="header-nav__list">
           @if (Auth::check())
           <li class="header-nav__item">
             <form action="/logout" method="post">
