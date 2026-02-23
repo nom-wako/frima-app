@@ -21,7 +21,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'img_url',
+        'is_profile_set',
     ];
+
+    // プロフィール用の住所を取得
+    public function profileAddress()
+    {
+        return $this->hasOne(Address::class)->where('is_profile', true);
+    }
+
+    // 購入時の送付先を含むすべての住所を取得
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

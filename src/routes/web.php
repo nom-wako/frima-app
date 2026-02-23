@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/item/{product}', [ProductController::class, 'show'])
     ->name('products.show');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
