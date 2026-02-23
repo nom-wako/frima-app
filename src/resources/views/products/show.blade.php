@@ -76,7 +76,12 @@
         @csrf
         <div class="form__group">
           <label for="comment">商品へのコメント</label>
-          <textarea name="comment" id="comment" required></textarea>
+          <textarea name="comment" id="comment">{{ old('comment') }}</textarea>
+          <div class="form__error">
+            @error('comment')
+            {{ $message }}
+            @enderror
+          </div>
         </div>
         <div class="form__button form__button--comment">
           <button type="submit" class="form__button-submit form__button-submit--comment">コメントを送信する</button>

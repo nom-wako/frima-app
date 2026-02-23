@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Product;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Product $product)
+    public function store(CommentRequest $request, Product $product)
     {
-        $request->validate([
-            'comment' => ['required', 'max:255'],
-        ]);
-
+        dd($request->all());
         Comment::create([
             'comment' => $request->comment,
             'product_id' => $product->id,
