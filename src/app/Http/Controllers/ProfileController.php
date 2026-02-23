@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    // プロフィール画面の表示
+    public function show(Request $request)
+    {
+        $user = Auth::user();
+        $page = $request->query('page', 'buy');
+
+        if ($page === 'sell') {
+            $products = $user->products;
+        } else {
+            $products = $user->purchasedProducts;
+        }
+        $products = $products ?? collect();
+        return view('mypage.mypage', compact('user', 'products', 'page'));
+    }
+
     // プロフィール設定画面の表示
     public function edit()
     {

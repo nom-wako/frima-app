@@ -1,0 +1,46 @@
+.mypage-user {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 150px 1fr auto;
+  gap: 40px;
+  margin: 60px auto 0;
+  width: 1020px;
+}
+
+.mypage-user__img {
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+}
+.mypage-user__img img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mypage-user__name {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.mypage-user__edit {
+  cursor: pointer;
+  border: 2px solid #FF5555;
+  border-radius: 5px;
+  color: #FF5555;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 16px 8px;
+  transition: background-color .3s ease, color .3s ease;
+  width: 310px;
+}
+.mypage-user__edit:hover {
+  background-color: #FF5555;
+  color: #fff;
+  opacity: 1;
+}
