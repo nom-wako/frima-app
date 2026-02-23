@@ -36,6 +36,29 @@
 
 .show-icons {
   list-style: none;
+  display: flex;
+  margin-top: 30px;
+}
+
+.show-icons__item {
+  display: grid;
+  justify-items: center;
+  padding-inline: 20px;
+}
+
+.show-icons__icon {
+  width: 40px;
+  height: 40px;
+}
+.show-icons__icon img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.show-icons__num {
+  font-size: 18px;
 }
 
 .show-purchase {

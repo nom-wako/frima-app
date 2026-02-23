@@ -18,8 +18,14 @@
       </p>
     </div>
     <ul class="show-icons">
-      <li class="show-icons__item"></li>
-      <li class="show-icons__item"></li>
+      <li class="show-icons__item">
+        <div class="show-icons__icon"><img src="{{ asset('img/show/comment.svg') }}" alt="コメント数"></div>
+        <p class="show-icons__num">{{ $product->comments_count }}</p>
+      </li>
+      <li class="show-icons__item">
+        <div class="show-icons__icon"><img src="{{ asset('img/show/comment.svg') }}" alt="コメント数"></div>
+        <p class="show-icons__num">{{ $product->comments_count }}</p>
+      </li>
     </ul>
     <a href="/purchase/{{ $product->id }}" class="show-purchase">購入手続きへ</a>
     <section class="show-section">
@@ -42,22 +48,28 @@
       </dl>
     </section>
     <section class="show-section">
-      <h3 class="show-section__heading show-section__heading--comment">コメント(1)</h3>
+      <h3 class="show-section__heading show-section__heading--comment">コメント({{ $product->comments_count }})</h3>
+      @foreach($product->comments as $comment)
       <div class="show-comment">
         <div class="show-comment__user">
-          <div class="show-comment__user-img"></div>
-          <p class="show-comment__user-name">admin</p>
+          <div class="show-comment__user-img">
+            @if($comment->user->img_url)
+            <img src="{{ asset('storage/' . $comment->user->img_url) }}" alt="">
+            @endif
+          </div>
+          <p class="show-comment__user-name">{{ $comment->user->name }}</p>
         </div>
         <div class="show-comment__box">
-          <p class="show-comment__text">こちらにコメントが入ります。</p>
+          <p class="show-comment__text">{!! nl2br(e($comment->comment)) !!}</p>
         </div>
       </div>
+      @endforeach
       @auth
-      <form action="" method="post" class="form">
+      <form action="{{ route('comments.store', $product->id) }}" method="post" class="form">
         @csrf
         <div class="form__group">
           <label for="comment">商品へのコメント</label>
-          <textarea name="comment" id="comment"></textarea>
+          <textarea name="comment" id="comment" required></textarea>
         </div>
         <div class="form__button form__button--comment">
           <button type="submit" class="form__button-submit form__button-submit--comment">コメントを送信する</button>
