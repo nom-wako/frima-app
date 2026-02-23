@@ -43,4 +43,16 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    // お気に入りでユーザーとの関連を取得
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+    // 特定のユーザーがお気に入り済か判定
+    public function isFavoritedBy(?User $user): bool
+    {
+        if (!$user) return false;
+        return $this->favoritedBy()->where('user_id', $user->id)->exists();
+    }
 }

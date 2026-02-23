@@ -13,18 +13,16 @@ class ProductController extends Controller
         $tab = $request->query('tab');
 
         if ($tab === 'mylist') {
-            $user = Auth::user();
-            $products = ($user && method_exists($user, 'favoriteProducts')) ? $user->favoriteProducts : collect();
+            $products = Auth::check() ? Auth::user()->favoriteProducts : collect();
         } else {
-            $products = Product::all();
+            $products = Product::all()->where('user_id', '!=', Auth::id());
         }
-        $products = $products ?? collect();
         return view('products.index', compact('products', 'tab'));
     }
 
     public function show(Product $product)
     {
-        $product->loadCount('comments');
+        $product->loadCount('comments', 'favoritedBy');
         $product->load(['condition', 'categories', 'comments.user']);
         return view('products.show', compact('product'));
     }

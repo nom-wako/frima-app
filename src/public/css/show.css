@@ -61,6 +61,16 @@
   font-size: 18px;
 }
 
+.show-favorite path {
+  fill: transparent;
+  stroke: #4B4B4B;
+  stroke-width: 40px;
+  transition: fill .3s ease;
+}
+.show-favorite.is-active path {
+  fill: #ff4B5C;
+}
+
 .show-purchase {
   background-color: #FF5555;
   border-radius: 5px;

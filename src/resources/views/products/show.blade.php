@@ -21,8 +21,18 @@
     </div>
     <ul class="show-icons">
       <li class="show-icons__item">
-        <div class="show-icons__icon"><img src="{{ asset('img/show/comment.svg') }}" alt="コメント数"></div>
-        <p class="show-icons__num">{{ $product->comments_count }}</p>
+        <div class="show-icons__icon">
+          <form action="{{ $product->isFavoritedBy(auth()->user()) ? route('favorite.destroy', $product) : route('favorite.store', $product) }}" method="post">
+            @csrf
+            @if ($product->isFavoritedBy(auth()->user()))
+            @method('DELETE')
+            @endif
+            <button type="submit" class="show-favorite {{ $product->isFavoritedBy(auth()->user()) ? 'is-active' : '' }}">
+              <x-favorite-icon />
+            </button>
+          </form>
+        </div>
+        <p class="show-icons__num">{{ $product->favorited_by_count }}</p>
       </li>
       <li class="show-icons__item">
         <div class="show-icons__icon"><img src="{{ asset('img/show/comment.svg') }}" alt="コメント数"></div>
