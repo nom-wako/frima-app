@@ -16,7 +16,7 @@ class Product extends Model
         'brand',
         'description',
         'price',
-        'image_path',
+        'img_url',
         'is_sold'
     ];
 

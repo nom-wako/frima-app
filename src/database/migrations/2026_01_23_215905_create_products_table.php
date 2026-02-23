@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('brand')->nullable();
             $table->text('description');
             $table->unsignedInteger('price');
-            $table->string('image_path');
+            $table->string('img_url');
             $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
