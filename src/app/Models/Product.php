@@ -55,4 +55,14 @@ class Product extends Model
         if (!$user) return false;
         return $this->favoritedBy()->where('user_id', $user->id)->exists();
     }
+
+    // 購入データとの関連を取得
+    public function purchase()
+    {
+        return $this->hasOne(Purchase::class);
+    }
+    public function isSold(): bool
+    {
+        return $this->purchase()->exists();
+    }
 }
