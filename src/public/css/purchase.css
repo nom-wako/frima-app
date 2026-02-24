@@ -81,6 +81,26 @@
   width: 100%;
 }
 
+.purchase-stripe {
+  background-color: #F9F9F9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: none;
+  margin-top: 30px;
+  margin-left: 60px;
+  padding: 15px;
+}
+
+.purchase-stripe__heading {
+  margin-bottom: 10px;
+}
+
+.purchase-stripe__error {
+  color: #fa755a;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
 .purchase-address {
   display: grid;
   grid-template-columns: 1fr auto;

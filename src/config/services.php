@@ -34,4 +34,9 @@ return [
         'url' => env('MAIL_DASHBOARD_URL', 'http://localhost:8025'),
     ],
 
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
+
 ];

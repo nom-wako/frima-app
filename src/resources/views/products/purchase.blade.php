@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-<form action="{{ route('purchase.store', $product) }}" method="post" class="purchase-form">
+<meta name="stripe-key" content="{{ config('services.stripe.key') }}">
+<form action="{{ route('purchase.store', $product) }}" method="post" id="purchase-form" class="purchase-form">
   @csrf
   <div class="purchase-form__input">
     <div class="purchase-product">
@@ -21,11 +22,16 @@
     <div class="purchase-payment">
       <label for="payment-method" class="purchase-section__heading">支払い方法</label>
       <div class="purchase-payment__select">
-        <select name="payment-method" id="payment-method">
+        <select name="payment_method" id="payment-method">
           <option value="" disabled selected>選択してください</option>
           <option value="1">コンビニ払い</option>
           <option value="2">カード払い</option>
         </select>
+      </div>
+      <div id="card-info-area" class="purchase-stripe">
+        <p class="purchase-stripe__heading">カード情報</p>
+        <div id="card-element"></div>
+        <div id="card-errors" role="alert" class="purchase-stripe__error"></div>
       </div>
     </div>
     <div class="purchase-address">
@@ -49,6 +55,15 @@
         <td id="display-payment-method">未選択</td>
       </tr>
     </table>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
     <div class="purchase-form__button">
       <button type="submit" class="purchase-form__button-submit" id="buy-button">購入する</button>
     </div>
@@ -57,5 +72,6 @@
 @endsection
 
 @push('scripts')
+<script src="https://js.stripe.com/v3/"></script>
 <script src="{{ asset('js/purchase.js') }}"></script>
 @endpush

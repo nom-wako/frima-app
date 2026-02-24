@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 class PurchaseController extends Controller
 {
@@ -20,6 +23,37 @@ class PurchaseController extends Controller
 
     public function store(Request $request, Product $product)
     {
-        return redirect()->route('item.index');
+        // Stripeの秘密鍵をセット
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        try {
+            if ($request->payment_method === '2') {
+                $paymentIntent = PaymentIntent::create([
+                    'amount' => $product->price,
+                    'currency' => 'jpy',
+                    'payment_method_data' => [
+                        'type' => 'card',
+                        'card' => ['token' => $request->stripeToken],
+                    ],
+                    'confirm' => true,
+                    'automatic_payment_methods' => [
+                        'enabled' => true,
+                        'allow_redirects' => 'never',
+                    ],
+                ]);
+            }
+
+            Purchase::create([
+                'user_id' => Auth::id(),
+                'product_id' => $product->id,
+                'address_id' => $request->address_id,
+                'payment_method' => $request->payment_method,
+            ]);
+            $product->update(['is_sold' => true]);
+
+            return redirect()->route('top')->with('message', '購入が完了しました！');
+        } catch (\Exception $e) {
+            return back()->withErrors(['stripe_error' => '決済に失敗しました：' . $e->getMessage()]);
+        }
     }
 }
