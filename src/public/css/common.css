@@ -116,7 +116,7 @@ textarea {
   margin-top: 35px;
 }
 
-.form__group label {
+.form__group > label {
   font-size: 24px;
   font-weight: 700;
 }
@@ -228,7 +228,6 @@ textarea {
 }
 
 .product-list__link {
-  aspect-ratio: 1/1;
   display: block;
   width: 100%;
 }
@@ -242,6 +241,8 @@ textarea {
 }
 
 .product-list__img {
+  aspect-ratio: 1/1;
+  background-color: #eee;
   position: relative;
 }
 

@@ -46,7 +46,7 @@
     @endif
     <section class="show-section">
       <h3 class="show-section__heading">商品説明</h3>
-      <div class="show-description">{{ $product->description }}</div>
+      <div class="show-description">{!! nl2br(e($product->description)) !!}</div>
     </section>
     <section class="show-section">
       <h3 class="show-section__heading">商品の情報</h3>

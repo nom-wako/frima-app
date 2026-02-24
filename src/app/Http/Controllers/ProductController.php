@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Models\Category;
+use App\Models\Condition;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -25,5 +29,39 @@ class ProductController extends Controller
         $product->loadCount('comments', 'favoritedBy');
         $product->load(['condition', 'categories', 'comments.user']);
         return view('products.show', compact('product'));
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        $conditions = Condition::all();
+        return view('products.sell', compact('categories', 'conditions'));
+    }
+
+    public function store(ProductRequest $request)
+    {
+        $user = Auth::user();
+
+        $product = DB::transaction(function () use ($request, $user) {
+            // 画像保存処理
+            $imgUrl = $request->file('img_url')->store('products', 'public');
+
+            // Productsテーブルの作成
+            $newProduct = Product::create([
+                'user_id' => $user->id,
+                'condition_id' => $request->condition_id,
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'img_url' => $imgUrl,
+            ]);
+
+            // カテゴリーの紐付け
+            $newProduct->categories()->sync($request->categories);
+
+            return $newProduct;
+        });
+
+        return redirect()->route('products.show', ['product' => $product->id]);
     }
 }
