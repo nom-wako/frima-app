@@ -26,7 +26,7 @@ class ProductController extends Controller
 
         if (!empty($keyword)) {
             $query->where(function ($q) use ($keyword) {
-                $q->where('name', 'LIKE', "%{$keyword}%")->orWhere('description', 'LIKE', "%{$keyword}%");
+                $q->where('name', 'LIKE', "%{$keyword}%");
             });
         }
 

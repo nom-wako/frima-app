@@ -6,7 +6,7 @@
 @section('content')
 <section class="section section--narrow">
   <div class="section__inner">
-    <h2 class="heading heading--primary">住所の変更</h2>
+    <h1 class="heading heading--primary">住所の変更</h1>
     <form action="{{ route('address.update', ['product' => $product->id]) }}" method="post" class="form">
       @csrf
       <div class="form__group">

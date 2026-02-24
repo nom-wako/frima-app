@@ -31,6 +31,11 @@ class PurchaseController extends Controller
 
     public function store(Request $request, Product $product)
     {
+        // 排他制御
+        if ($product->user_id === Auth::id()) {
+            return back();
+        }
+
         // Stripeの秘密鍵をセット
         Stripe::setApiKey(config('services.stripe.secret'));
 

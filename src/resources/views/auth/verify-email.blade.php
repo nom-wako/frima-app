@@ -7,7 +7,7 @@
 @section('content')
 <section class="section">
   <div class="section__inner">
-    <h2 class="verify-email__heading">登録していただいたメールアドレスに認証メールを送付しました。<br>メール認証を完了してください。</h2>
+    <h1 class="verify-email__heading">登録していただいたメールアドレスに認証メールを送付しました。<br>メール認証を完了してください。</h1>
     <a href="{{ config('services.mail_dashboard.url') }}" target="_blank" rel="noopener noreferrer" class="verify-email__button">認証はこちらから</a>
     <form action="{{ route('verification.send') }}" method="post">
       @csrf

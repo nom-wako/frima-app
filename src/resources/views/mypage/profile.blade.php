@@ -6,7 +6,7 @@
 @section('content')
 <section class="section section--narrow">
   <div class="section__inner">
-    <h2 class="heading heading--primary">プロフィール設定</h2>
+    <h1 class="heading heading--primary">プロフィール設定</h1>
     @if(session('status'))
     <p class="form__status">{{ session('status') }}</p>
     @endif

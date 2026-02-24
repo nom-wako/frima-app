@@ -11,7 +11,6 @@ class CommentController extends Controller
 {
     public function store(CommentRequest $request, Product $product)
     {
-        dd($request->all());
         Comment::create([
             'comment' => $request->comment,
             'product_id' => $product->id,

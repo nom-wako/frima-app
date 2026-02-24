@@ -11,7 +11,7 @@
   </div>
   <div class="show-detail__content">
     <div class="show-header">
-      <h2 class="show-name">{{ $product->name }}</h2>
+      <h1 class="show-name">{{ $product->name }}</h1>
       <p class="show-brand">{{ $product->brand }}</p>
       <p class="show-price">
         <span class="show-price__currency">¥</span>
@@ -84,7 +84,6 @@
         </div>
       </div>
       @endforeach
-      @auth
       @if(!$product->is_sold)
       <form action="{{ route('comments.store', $product->id) }}" method="post" class="form">
         @csrf
@@ -102,7 +101,6 @@
         </div>
       </form>
       @endif
-      @endauth
     </section>
   </div>
 </section>

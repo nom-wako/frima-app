@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     form.submit();
   }
+
+  document.getElementById('purchase-form').addEventListener('submit', function () {
+    document.getElementById('buy-button').disabled = true;
+  })
 });
 
 // document.addEventListener('DOMContentLoaded', function () {

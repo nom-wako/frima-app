@@ -12,7 +12,7 @@
     <div class="purchase-product">
       <div class="purchase-product__img"><img src="{{ asset('storage/' . $product->img_url) }}" alt=""></div>
       <div class="purchase-product__detail">
-        <h2 class="purchase-product__name">{{ $product->name }}</h2>
+        <h1 class="purchase-product__name">{{ $product->name }}</h1>
         <p class="purchase-product__price">
           <span class="purchase-product__currency">¥</span>
           <span class="purchase-product__amount">{{ number_format($product->price) }}</span>
@@ -55,7 +55,6 @@
         <td id="display-payment-method">未選択</td>
       </tr>
     </table>
-    @if ($errors->any())
     <div class="alert alert-danger">
       <ul>
         @foreach ($errors->all() as $error)

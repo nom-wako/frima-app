@@ -7,7 +7,7 @@
 @section('content')
 <section class="section section--narrow">
   <div class="section__inner">
-    <h2 class="heading heading--primary">商品の出品</h2>
+    <h1 class="heading heading--primary">商品の出品</h1>
     <form action="{{ route('product.store') }}" method="post" class="form" enctype="multipart/form-data">
       @csrf
       <div class="form__group">
@@ -26,7 +26,7 @@
         </div>
       </div>
       <section class="sell-section">
-        <h3 class="sell-section__heading">商品の詳細</h3>
+        <h2 class="sell-section__heading">商品の詳細</h2>
         <div class="form__group">
           <label>カテゴリー</label>
           <ul class="sell-category">
@@ -61,7 +61,7 @@
         </div>
       </section>
       <section class="sell-section">
-        <h3 class="sell-section__heading">商品名と説明</h3>
+        <h2 class="sell-section__heading">商品名と説明</h2>
         <div class="form__group">
           <label for="name">商品名</label>
           <input type="text" name="name" id="name" value="{{ old('name') }}">
