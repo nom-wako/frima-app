@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MypageController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,11 +25,11 @@ Route::get('/item/{product}', [ProductController::class, 'show'])
     ->name('products.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/mypage/profile', [MypageController::class, 'edit'])->name('profile.edit');
+    Route::post('/mypage/profile', [MypageController::class, 'update'])->name('profile.update');
 
     Route::middleware(['check.profile'])->group(function () {
-        Route::get('/mypage', [ProfileController::class, 'show'])->name('profile.show');
+        Route::get('/mypage', [MypageController::class, 'show'])->name('profile.show');
         Route::post('/item/{product}/comments', [CommentController::class, 'store'])->name('comments.store');
         Route::post('/item/{product}/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
         Route::delete('/item/{product}/favorite', [FavoriteController::class, 'destroy'])->name('favorite.destroy');

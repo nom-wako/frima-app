@@ -8,20 +8,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class ProfileController extends Controller
+class MypageController extends Controller
 {
     // プロフィール画面の表示
     public function show(Request $request)
     {
         $user = Auth::user();
-        $page = $request->query('page', 'buy');
+        $page = $request->query('page', 'sell');
 
-        if ($page === 'sell') {
-            $products = $user->products;
+        if ($page === 'buy') {
+            $products = $user->purchasedProducts()->with('product')->get();
         } else {
-            $products = $user->purchasedProducts;
+            $products = $user->products;
         }
-        $products = $products ?? collect();
         return view('mypage.mypage', compact('user', 'products', 'page'));
     }
 

@@ -23,15 +23,18 @@
 @else
 <ul class="product-list">
   @foreach ($products as $product)
+  @php
+  $item = ($page === 'buy') ? $product->product : $product;
+  @endphp
   <li class="product-list__item">
-    <a href="{{ route('products.show', ['product' => $product->id]) }}" class="product-list__link">
+    <a href="{{ route('products.show', ['product' => $item->id]) }}" class="product-list__link">
       <div class="product-list__img">
-        <img src="{{ asset('storage/' . $product->img_url) }}" alt="">
-        @if($product->is_sold)
+        <img src="{{ asset('storage/' . $item->img_url) }}" alt="">
+        @if($item->is_sold)
         <p class="product-list__sold">Sold</p>
         @endif
       </div>
-      <p class="product-list__name">{{ $product->name }}</p>
+      <p class="product-list__name">{{ $item->name }}</p>
     </a>
   </li>
   @endforeach

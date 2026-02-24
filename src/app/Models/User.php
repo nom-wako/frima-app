@@ -49,6 +49,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Product::class, 'favorites');
     }
 
+    // 出品した商品
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id');
+    }
+
+    // 購入した商品
+    public function purchasedProducts()
+    {
+        return $this->hasMany(Purchase::class, 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
