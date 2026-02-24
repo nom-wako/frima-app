@@ -33,8 +33,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/item/{product}/comments', [CommentController::class, 'store'])->name('comments.store');
         Route::post('/item/{product}/favorite', [FavoriteController::class, 'store'])->name('favorite.store');
         Route::delete('/item/{product}/favorite', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
-        Route::get('/purchase/{product}', [PurchaseController::class, 'showConfirmation'])->name('purchase.show');
+        Route::get('/purchase/{product}', [PurchaseController::class, 'show'])->name('purchase.show');
         Route::get('/purchase/address/{product}', [AddressController::class, 'edit'])->name('address.edit');
+        Route::post('/purchase/address/{product}', [AddressController::class, 'update'])->name('address.update');
         Route::post('/purchase/{product}', [PurchaseController::class, 'store'])->name('purchase.store');
     });
 });

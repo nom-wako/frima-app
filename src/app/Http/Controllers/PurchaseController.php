@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
@@ -11,13 +12,20 @@ use Stripe\Stripe;
 
 class PurchaseController extends Controller
 {
-    public function showConfirmation(Product $product)
+    public function show(Request $request, Product $product)
     {
         if ($product->isSold()) {
             return redirect()->route('products.show', $product);
         }
 
-        $address = Auth::user()->profileAddress;
+        // 住所変更画面から戻ってきた場合
+        $selectedAddressId = $request->query('selected_address_id');
+        if ($selectedAddressId) {
+            $address = Address::find($selectedAddressId);
+        } else {
+            $address = Auth::user()->profileAddress;
+        }
+
         return view('products.purchase', compact('product', 'address'));
     }
 
