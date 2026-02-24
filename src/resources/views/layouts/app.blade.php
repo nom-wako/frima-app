@@ -17,7 +17,11 @@
         <a href="/" class="header-logo__link"><img src="{{ asset('img/common/logo.svg') }}" alt="COACHTECH"></a>
       </div>
       <div class="header-search">
-        <input type="text" name="search">
+        <form action="{{ route('products.index') }}" method="get">
+          @csrf
+          <input type="hidden" name="tab" value="{{ request('tab') }}">
+          <input type="text" name="search" placeholder="なにをお探しですか？" value="{{ request('search') }}">
+        </form>
       </div>
       <nav class="header-nav">
         <ul class="header-nav__list">

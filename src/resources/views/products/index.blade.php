@@ -6,8 +6,8 @@
 
 @section('content')
 <div class="tabs">
-  <a href="/" class="tab-item {{ request('tab') !== 'mylist' ? 'is-active' : '' }}">おすすめ</a>
-  <a href="/?tab=mylist" class="tab-item {{ request('tab') === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
+  <a href="{{ route('products.index', ['search' => request('search')]) }}" class="tab-item {{ request('tab') !== 'mylist' ? 'is-active' : '' }}">おすすめ</a>
+  <a href="{{ route('products.index', ['tab' => 'mylist', 'search' => request('search')]) }}" class="tab-item {{ request('tab') === 'mylist' ? 'is-active' : '' }}">マイリスト</a>
 </div>
 @if($products->isEmpty())
 <p class="product-list__empty">お気に入り登録した商品はまだありません。</p>

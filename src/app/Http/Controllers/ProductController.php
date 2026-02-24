@@ -15,12 +15,23 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab');
+        $keyword = $request->query('search');
 
         if ($tab === 'mylist') {
-            $products = Auth::check() ? Auth::user()->favoriteProducts : collect();
+            // $products = Auth::check() ? Auth::user()->favoriteProducts : collect();
+            $query = Auth::check() ? Auth::user()->favoriteProducts() : Product::whereRaw('1 = 0');
         } else {
-            $products = Product::all()->where('user_id', '!=', Auth::id());
+            $query = Product::where('user_id', '!=', Auth::id());
         }
+
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('name', 'LIKE', "%{$keyword}%")->orWhere('description', 'LIKE', "%{$keyword}%");
+            });
+        }
+
+        $products = $query->get();
+
         return view('products.index', compact('products', 'tab'));
     }
 
