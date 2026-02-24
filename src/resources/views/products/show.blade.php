@@ -40,9 +40,13 @@
       </li>
     </ul>
     @if($product->is_sold)
-    <p class="show-purchase is-sold">Sold</p>
+    <p class="show-purchase is-disabled">Sold</p>
     @else
+    @if(Auth::id() !== $product->user_id)
     <a href="/purchase/{{ $product->id }}" class="show-purchase">購入手続きへ</a>
+    @else
+    <p class="show-purchase is-disabled">あなたが出品した商品です</p>
+    @endif
     @endif
     <section class="show-section">
       <h3 class="show-section__heading">商品説明</h3>
