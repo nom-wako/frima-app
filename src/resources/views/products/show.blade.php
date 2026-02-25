@@ -85,7 +85,7 @@
       </div>
       @endforeach
       @if(!$product->is_sold)
-      <form action="{{ route('comments.store', $product->id) }}" method="post" class="form">
+      <form action="{{ route('comment.store', $product->id) }}" method="post" class="form">
         @csrf
         <div class="form__group">
           <label for="comment">商品へのコメント</label>

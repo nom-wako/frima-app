@@ -59,6 +59,7 @@ class ProductController extends Controller
                 'user_id' => $user->id,
                 'condition_id' => $request->condition_id,
                 'name' => $request->name,
+                'brand' => $request->brand,
                 'description' => $request->description,
                 'price' => $request->price,
                 'img_url' => $imgUrl,
