@@ -25,37 +25,31 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_profile_set',
     ];
 
-    // プロフィール用の住所を取得
     public function profileAddress()
     {
         return $this->hasOne(Address::class)->where('is_profile', true);
     }
 
-    // 購入時の送付先を含むすべての住所を取得
     public function addresses()
     {
         return $this->hasMany(Address::class);
     }
 
-    // 投稿コメントを取得
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    // お気に入りで商品との関連を取得
     public function favoriteProducts()
     {
         return $this->belongsToMany(Product::class, 'favorites');
     }
 
-    // 出品した商品
     public function products()
     {
         return $this->hasMany(Product::class, 'user_id');
     }
 
-    // 購入した商品
     public function purchasedProducts()
     {
         return $this->hasMany(Purchase::class, 'user_id');

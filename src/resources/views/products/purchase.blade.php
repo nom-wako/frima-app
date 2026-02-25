@@ -62,7 +62,6 @@
         @endforeach
       </ul>
     </div>
-    @endif
     <div class="purchase-form__button">
       <button type="submit" class="purchase-form__button-submit" id="buy-button">購入する</button>
     </div>

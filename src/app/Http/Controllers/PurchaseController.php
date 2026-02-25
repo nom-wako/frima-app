@@ -18,7 +18,6 @@ class PurchaseController extends Controller
             return redirect()->route('products.show', $product);
         }
 
-        // 住所変更画面から戻ってきた場合
         $selectedAddressId = $request->query('selected_address_id');
         if ($selectedAddressId) {
             $address = Address::find($selectedAddressId);
@@ -31,12 +30,10 @@ class PurchaseController extends Controller
 
     public function store(Request $request, Product $product)
     {
-        // 排他制御
         if ($product->user_id === Auth::id()) {
             return back();
         }
 
-        // Stripeの秘密鍵をセット
         Stripe::setApiKey(config('services.stripe.secret'));
 
         try {

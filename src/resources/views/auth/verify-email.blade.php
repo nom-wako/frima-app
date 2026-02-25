@@ -13,6 +13,9 @@
       @csrf
       <button type="submit" class="verify-email__resend">認証メールを再送する</button>
     </form>
+    @if (session('status') == 'verification-link-sent')
+    <div>認証リンクを再送しました</div>
+    @endif
   </div>
 </section>
 @endsection

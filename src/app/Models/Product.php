@@ -20,43 +20,36 @@ class Product extends Model
         'is_sold'
     ];
 
-    // 出品者を取得
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // 商品の状態を取得
     public function condition()
     {
         return $this->belongsTo(Condition::class);
     }
 
-    // 商品カテゴリーを取得
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
 
-    // 商品に紐づいたコメントを取得
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    // お気に入りでユーザーとの関連を取得
     public function favoritedBy()
     {
         return $this->belongsToMany(User::class, 'favorites');
     }
-    // 特定のユーザーがお気に入り済か判定
     public function isFavoritedBy(?User $user): bool
     {
         if (!$user) return false;
         return $this->favoritedBy()->where('user_id', $user->id)->exists();
     }
 
-    // 購入データとの関連を取得
     public function purchase()
     {
         return $this->hasOne(Purchase::class);
